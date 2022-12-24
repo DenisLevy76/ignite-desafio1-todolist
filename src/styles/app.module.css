@@ -6,6 +6,7 @@
 
   max-width: 736px;
   width: 100%;
+  padding: 0 1rem;
 }
 
 .create-task-form {
@@ -34,4 +35,56 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+}
+
+.tasks {
+  padding: 4rem 0;
+}
+
+.tasks > header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.number-of-tasks {
+  color: var(--blue-300);
+  font-weight: bold;
+}
+
+.done-tasks {
+  color: var(--purple-300);
+  font-weight: bold;
+}
+
+.tasks > header h4 > span {
+  padding: 0.15rem 0.5rem;
+  border-radius: 50%;
+  background-color: var(--gray-400);
+  color: var(--gray-100);
+  display: inline-block;
+  font-weight: 700;
+}
+
+.tasks__list {
+  width: 100%;
+
+  border-top: 1px solid var(--gray-400);
+  border-radius: 8px;
+
+  height: 200px;
+  margin-top: 1.5rem;
+}
+
+.tasks__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  color: var(--gray-300);
+  line-height: 140%;
+}
+
+.tasks__empty > strong {
+  font-weight: bold;
 }
