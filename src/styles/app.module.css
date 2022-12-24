@@ -1,0 +1,37 @@
+.container {
+  margin: calc(0px - 53px / 2) auto 0px auto;
+
+  display: flex;
+  flex-direction: column;
+
+  max-width: 736px;
+  width: 100%;
+}
+
+.create-task-form {
+  display: flex;
+  width: 100%;
+
+  display: flex;
+  gap: 1rem;
+}
+
+.create-task-form > input[type='text'] {
+  width: 100%;
+  background-color: var(--gray-500);
+  border: 1px solid var(--gray-700);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.create-task-form > button[type='submit'] {
+  padding: 0 1rem;
+  border-radius: 8px;
+  background-color: var(--blue-500);
+  white-space: nowrap;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
