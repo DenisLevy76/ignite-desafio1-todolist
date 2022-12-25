@@ -50,13 +50,15 @@ export const App = () => {
   };
 
   const handleOnTaskDone = (taskId: string) => {
-    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    const updatedTasksList = tasks.map((task) => {
+      if (task.id === taskId)
+        return {
+          ...task,
+          isDone: !task.isDone,
+        };
 
-    const updatedTasksList = [...tasks];
-    updatedTasksList[taskIndex] = {
-      ...updatedTasksList[taskIndex],
-      isDone: !updatedTasksList[taskIndex].isDone,
-    };
+      return task;
+    });
 
     setTasks(updatedTasksList);
   };
