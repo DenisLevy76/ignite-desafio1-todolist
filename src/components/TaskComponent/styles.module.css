@@ -1,0 +1,36 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+
+  background-color: var(--gray-400);
+  border-radius: 8px;
+}
+
+.task > p {
+  font-size: 0.875rem;
+  line-height: 140%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.delete__task {
+  background-color: transparent;
+  font-size: 0;
+  border-radius: 4px;
+  transition: 0.15s;
+
+  color: var(--gray-300);
+}
+
+.delete__task:hover {
+  color: var(--red-500);
+  cursor: pointer;
+}

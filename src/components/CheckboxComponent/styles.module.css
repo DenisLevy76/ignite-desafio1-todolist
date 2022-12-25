@@ -1,0 +1,35 @@
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+
+  min-width: 1.2rem;
+  min-height: 1.2rem;
+
+  border-radius: 50%;
+
+  border: 2px solid var(--blue-300);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox::before {
+  content: '';
+  width: 0.25rem;
+  height: 0.5rem;
+  border-bottom: 2px solid var(--gray-100);
+  border-right: 2px solid var(--gray-100);
+  display: none;
+  transform: rotate(45deg);
+  margin-top: -3px;
+}
+
+.checkbox:checked {
+  border-color: var(--purple-300);
+  background-color: var(--purple-300);
+}
+
+.checkbox:checked::before {
+  display: block;
+}
