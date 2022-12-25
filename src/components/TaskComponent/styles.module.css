@@ -7,18 +7,19 @@
 
   background-color: var(--gray-400);
   border-radius: 8px;
+
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.task.done {
+  opacity: 0.5;
+  text-decoration: line-through;
 }
 
 .task > p {
   font-size: 0.875rem;
   line-height: 140%;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
 }
 
 .delete__task {

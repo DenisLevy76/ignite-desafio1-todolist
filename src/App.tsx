@@ -1,6 +1,6 @@
 import { PlusCircle } from 'phosphor-react';
 import { ClipboardText } from 'phosphor-react';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { HeaderComponent } from './components/HeaderComponent';
 import { ITask, TaskComponent } from './components/TaskComponent';
 
@@ -11,6 +11,23 @@ export const App = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [taskText, setTaskText] = useState<string>('');
 
+  const ordenedTasks: ITask[] = tasks.sort((task) => {
+    if (task.isDone) {
+      return 1;
+    } else if (!task.isDone) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
+  const numberOfFinishedTasks = tasks.reduce((sum, task) => {
+    if (task.isDone) return sum + 1;
+    else return sum;
+  }, 0);
+
+  const isTasksEmpty = tasks.length > 0;
+
   const handleTextAreaValue = (event: ChangeEvent<HTMLInputElement>) =>
     setTaskText(event.target.value);
 
@@ -18,19 +35,42 @@ export const App = () => {
     setTasks((state) => [
       ...state,
       {
+        id: crypto.randomUUID(),
         content,
+        isDone: false,
       },
     ]);
 
     setTaskText('');
   };
 
-  const deleteTask = (taskContent: string) => {
-    const listWithoutSelectedOne = tasks.filter(
-      (task) => task.content !== taskContent
-    );
+  const deleteTask = (taskId: string) => {
+    const listWithoutSelectedOne = tasks.filter((task) => task.id !== taskId);
     setTasks(listWithoutSelectedOne);
   };
+
+  const handleOnTaskDone = (taskId: string) => {
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+
+    const updatedTasksList = [...tasks];
+    updatedTasksList[taskIndex] = {
+      ...updatedTasksList[taskIndex],
+      isDone: !updatedTasksList[taskIndex].isDone,
+    };
+
+    setTasks(updatedTasksList);
+  };
+
+  useEffect(() => {
+    const localStorageData = localStorage.getItem('tasks');
+    if (localStorageData && localStorageData.length > 2) {
+      setTasks(JSON.parse(localStorageData));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <div>
@@ -64,15 +104,24 @@ export const App = () => {
             </h4>
             <h4 className={styles['done-tasks']}>
               Concluídas{' '}
-              <span>{tasks.length > 0 ? `${0} de ${tasks.length}` : 0}</span>
+              <span>
+                {isTasksEmpty
+                  ? `${numberOfFinishedTasks} de ${tasks.length}`
+                  : 0}
+              </span>
             </h4>
           </header>
 
           <ul className={styles['tasks__list']}>
-            {tasks.length > 0 ? (
-              tasks.map((task) => (
+            {isTasksEmpty ? (
+              ordenedTasks.map((task) => (
                 <li>
-                  <TaskComponent task={task} onDelete={deleteTask} />
+                  <TaskComponent
+                    id={task.id}
+                    task={task}
+                    onDelete={deleteTask}
+                    onTaskDone={handleOnTaskDone}
+                  />
                 </li>
               ))
             ) : (
