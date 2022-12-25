@@ -92,7 +92,7 @@ export const App = () => {
             value={taskText}
             required
           />
-          <button type="submit">
+          <button type="submit" disabled={!taskText}>
             Criar <PlusCircle size={24} />
           </button>
         </form>

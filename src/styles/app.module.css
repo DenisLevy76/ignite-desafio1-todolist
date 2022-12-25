@@ -41,8 +41,13 @@
   transition: 0.2s;
 }
 
-.create-task-form > button[type='submit']:hover {
+.create-task-form > button[type='submit']:hover:not(:disabled) {
   background-color: var(--blue-300);
+}
+
+.create-task-form > button[type='submit']:disabled {
+  filter: brightness(0.5);
+  cursor: not-allowed;
 }
 
 .tasks {

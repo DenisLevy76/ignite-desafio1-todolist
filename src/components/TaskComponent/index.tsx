@@ -37,6 +37,8 @@ export const TaskComponent: React.FC<TaskComponentProps> = ({
         type="button"
         onClick={() => onDelete && onDelete(task.id)}
         className={styles.delete__task}
+        aria-label="Deletar tarefa"
+        title="Deletar tarefa"
       >
         <Trash size={18} />
       </button>
