@@ -117,7 +117,7 @@ export const App = () => {
           <ul className={styles['tasks__list']}>
             {isTasksEmpty ? (
               ordenedTasks.map((task) => (
-                <li>
+                <li key={task.id}>
                   <TaskComponent
                     id={task.id}
                     task={task}
